@@ -10,7 +10,6 @@
     <a href="/about">About</a>
     <a href="/blog">Blog</a>
     <a href="/contact">Contact</a>
-
     <h1>Halaman About</h1>
 </body>
 </html>
