@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,18 +16,43 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', function () {
-    return view('posts', ['title' => 'Blog', 'posts' =>[
+    return view('posts', ['title' => 'Blog', 'posts' => [
         [
+            'id' => 1,
             'title' => 'Artikel 1',
             'author' => 'Reza Maulana Ismail',
             'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, corrupti excepturi dolores non doloribus dignissimos facere in, maxime voluptates fuga ea nobis praesentium maiores. Minus cum harum facilis velit reprehenderit.'
         ],
         [
+            'id' => 2,
             'title' => 'Artikel 2',
             'author' => 'Reza Maulana Ismail',
             'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque magni minus eius non nemo dolores sit, vel et repellendus repudiandae vitae recusandae explicabo eum ullam cupiditate laboriosam. Repudiandae, molestias consequuntur.'
         ]
     ]]);
+});
+
+Route::get('/posts/{id}', function ($id) {
+    $posts = [
+        [
+            'id' => 1,
+            'title' => 'Artikel 1',
+            'author' => 'Reza Maulana Ismail',
+            'body' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, corrupti excepturi dolores non doloribus dignissimos facere in, maxime voluptates fuga ea nobis praesentium maiores. Minus cum harum facilis velit reprehenderit.'
+        ],
+        [
+            'id' => 2,
+            'title' => 'Artikel 2',
+            'author' => 'Reza Maulana Ismail',
+            'body' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque magni minus eius non nemo dolores sit, vel et repellendus repudiandae vitae recusandae explicabo eum ullam cupiditate laboriosam. Repudiandae, molestias consequuntur.'
+        ]
+        ];
+
+        $post = Arr::first($posts, function ($post) use ($id) {
+            return $post['id'] == $id;
+        });
+
+        return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
 
 Route::get('/contact', function () {
