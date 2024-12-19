@@ -9,7 +9,7 @@
         <a href="#">{{ $post['author']}}</a> | 18 Desember 2024
     </div>
     <p class="my-4 font-light">
-        {{ $post['body']}}
+        {{ Str::limit ($post['body']), 100}}
     </p>
     <a href="" class="font-medium text-blue-500 hover:underline">Read more &raquo;</a>
 </article>
