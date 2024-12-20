@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
@@ -20,11 +19,10 @@ Route::get('/posts', function () {
     return view('posts', ['title' => 'Blog', 'posts' => Post::all()]);
 });
 
-// route untuk menampilkan single post dalam blog
+// route untuk menampilkan single post dalam blog dengan
 Route::get('/posts/{slug}', function ($slug) {
-        $post = Arr::first(Post::all(), function ($post) use ($slug) {
-            return $post['slug'] == $slug;
-        });
+    // memanggil method find untuk mencari slug menggunakan class Post
+        $post = Post::find($slug);
         return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
 
