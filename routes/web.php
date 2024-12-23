@@ -19,10 +19,9 @@ Route::get('/posts', function () {
     return view('posts', ['title' => 'Blog', 'posts' => Post::all()]);
 });
 
-// route untuk menampilkan single post dalam blog dengan
-Route::get('/posts/{slug}', function ($slug) {
-    // memanggil method find untuk mencari slug menggunakan class Post
-        $post = Post::find($slug);
+// route untuk menampilkan single post dalam blog dengan $slug
+Route::get('/posts/{post:slug}', function (Post $post) {
+
         return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
 
