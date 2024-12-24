@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
+
 {
     // perintah di terminal untuk membuat model Post beserta migration-nya
     // php artisan make:model Post -m
