@@ -17,7 +17,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('author');
+            $table->unsignedBigInteger('author_id'); //membuat author id yang berelasi dengan tabel users, string diubah menjadi unsignedBigInteger karena id yang ada di tabel user menggunakan big integer
+            $table->foreign('author_id')->references('id')->on('users'); //author_id berelasi dengan id yang ada di tabel users
             $table->string('slug')->unique();
             $table->text('body');
             $table->timestamps();
