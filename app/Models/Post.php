@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 
@@ -17,4 +18,11 @@ class Post extends Model
 
     //menunjukkan bahwa field tersebut boleh diisi secara manual
     protected $fillable = ['slug','title', 'author', 'body'];
+
+    // Menambahkan relasi belongsTo ke User untuk menghubungkan Post dengan User sebagai author.
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
