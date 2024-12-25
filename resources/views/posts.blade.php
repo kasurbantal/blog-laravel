@@ -8,7 +8,8 @@
         <h2 class="mb-1 text-3xl tracking-tight font-bold text-gray-900">{{ $post['title']}}</h2>
     </a>
     <div class="text-base text-gray-500">
-        <a href="#">{{ $post['author']}}</a> | {{ $post-> created_at->diffForHumans()}}
+        {{-- Mengubah akses author dari atribut biasa menjadi relasi dengan User untuk menampilkan nama penulis melalui relasi di model. --}}
+        <a href="#">{{ $post->author->name}}</a> | {{ $post-> created_at->diffForHumans()}}
     </div>
     <p class="my-4 font-light">
         {{ Str::limit ($post['body']), 100}}
