@@ -17,8 +17,14 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('author_id'); //membuat author id yang berelasi dengan tabel users, string diubah menjadi unsignedBigInteger karena id yang ada di tabel user menggunakan big integer
-            $table->foreign('author_id')->references('id')->on('users'); //author_id berelasi dengan id yang ada di tabel users
+            // Menambahkan kolom foreignId untuk author_id agar berelasi dengan tabel users.
+            // - Menggunakan metode `constrained()` untuk secara otomatis menetapkan relasi foreign key dengan tabel users.
+            // - Menentukan nama indeks foreign key secara eksplisit dengan parameter `indexName` sebagai 'posts_author_id'.
+            // - Metode ini memastikan integritas data antara kolom author_id di tabel posts dan kolom id di tabel users.
+            $table->foreignId('author_id')->constrained(
+                table: 'users',
+                indexName: 'posts_author_id'
+            );
             $table->string('slug')->unique();
             $table->text('body');
             $table->timestamps();
