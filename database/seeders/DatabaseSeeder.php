@@ -10,6 +10,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Post;
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,15 +29,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $reza = User::create([
-            'name' => 'Reza',
-            'username' => 'rezamau',
-            'email' => 'rezamau@mail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10)
-        ]);
-
         // Category::create([
         //     'name' => 'Learn Programming',
         //     'slug' => 'learn-programming'
@@ -49,10 +42,13 @@ class DatabaseSeeder extends Seeder
         //     'body' => 'Lorem ipsum dolore slamet, budi, wahyono, sarjito, uaseyeekk'
         // ]);
 
+        $this->call([CategorySeeder::class, UserSeeder::class]);
         Post::factory(100)->recycle([
-            Category::factory(3)->create(),
-            $reza,
-            User::factory(5)->create()
+            Category::all(),
+            User::all()
         ])->create();
+
+        // cara memanggil di terminal:
+        // php artisan seeder
     }
 }
