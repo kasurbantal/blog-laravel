@@ -27,14 +27,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // User::create([
-        //     'name' => 'Reza',
-        //     'username' => 'rezamau',
-        //     'email' => 'rezamau@mail.com',
-        //     'email_verified_at' => now(),
-        //     'password' => Hash::make('password'),
-        //     'remember_token' => Str::random(10)
-        // ]);
+        $reza = User::create([
+            'name' => 'Reza',
+            'username' => 'rezamau',
+            'email' => 'rezamau@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10)
+        ]);
 
         // Category::create([
         //     'name' => 'Learn Programming',
@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
 
         Post::factory(100)->recycle([
             Category::factory(3)->create(),
+            $reza,
             User::factory(5)->create()
         ])->create();
     }
