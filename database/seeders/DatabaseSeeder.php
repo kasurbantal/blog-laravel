@@ -2,11 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\User;
+use Faker\Provider\Lorem;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\Post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,6 +34,19 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10)
+        ]);
+
+        Category::create([
+            'name' => 'Learn Programming',
+            'slug' => 'learn-programming'
+        ]);
+
+        Post::create([
+            'title' => 'Artikel 1',
+            'author_id' => 1,
+            'category_id' => 1,
+            'slug' => 'artikel-1',
+            'body' => 'Lorem ipsum dolore slamet, budi, wahyono, sarjito, uaseyeekk'
         ]);
     }
 }
