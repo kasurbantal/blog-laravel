@@ -27,26 +27,31 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::create([
-            'name' => 'Reza',
-            'username' => 'rezamau',
-            'email' => 'rezamau@mail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10)
-        ]);
+        // User::create([
+        //     'name' => 'Reza',
+        //     'username' => 'rezamau',
+        //     'email' => 'rezamau@mail.com',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('password'),
+        //     'remember_token' => Str::random(10)
+        // ]);
 
-        Category::create([
-            'name' => 'Learn Programming',
-            'slug' => 'learn-programming'
-        ]);
+        // Category::create([
+        //     'name' => 'Learn Programming',
+        //     'slug' => 'learn-programming'
+        // ]);
 
-        Post::create([
-            'title' => 'Artikel 1',
-            'author_id' => 1,
-            'category_id' => 1,
-            'slug' => 'artikel-1',
-            'body' => 'Lorem ipsum dolore slamet, budi, wahyono, sarjito, uaseyeekk'
-        ]);
+        // Post::create([
+        //     'title' => 'Artikel 1',
+        //     'author_id' => 1,
+        //     'category_id' => 1,
+        //     'slug' => 'artikel-1',
+        //     'body' => 'Lorem ipsum dolore slamet, budi, wahyono, sarjito, uaseyeekk'
+        // ]);
+
+        Post::factory(100)->recycle([
+            Category::factory(3)->create(),
+            User::factory(5)->create()
+        ])->create();
     }
 }
