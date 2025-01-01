@@ -49,6 +49,6 @@ class DatabaseSeeder extends Seeder
         ])->create();
 
         // cara memanggil di terminal:
-        // php artisan seeder
+        // php artisan db:seed
     }
 }
