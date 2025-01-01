@@ -44,9 +44,13 @@ Route::get('/authors/{user:username}', function (User $user) {
     return view('posts', ['title' => count($posts) . ' Articles by ' . $user-> name, 'posts' => $posts]);
 });
 
+//Lazy Eager Loading
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('posts', ['title' => count($category->posts) . ' Articles in Category: ' . $category->slug,
-    'posts' => $category->posts]);
+    // Mengambil semua post yang ditulis oleh user berdasarkan category
+    // dan memuat relasi category dan author untuk setiap post secara efisien
+    $posts = $category->posts->load(['category', 'author']);
+    return view('posts', ['title' => count($posts) . ' Articles in Category: ' . $category->slug,
+    'posts' => $posts]);
 });
 
 Route::get('/contact', function () {
