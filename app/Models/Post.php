@@ -19,6 +19,10 @@ class Post extends Model
     //menunjukkan bahwa field tersebut boleh diisi secara manual
     protected $fillable = ['slug','title', 'author', 'body'];
 
+    //default untuk melakukan eager loading. untuk kasus ini melakukan eager loading untuk setiap pemanggilan relasi author dan category
+    //eager loading digunakan untuk menyelesaikan masalah loading pada query
+    protected $with = ['author', 'category'];
+
     // Menambahkan relasi belongsTo ke User untuk menghubungkan Post dengan User sebagai author.
     public function author(): BelongsTo
     {
