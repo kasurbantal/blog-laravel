@@ -17,8 +17,10 @@ Route::get('/about', function () {
     return view('about', ['title' => 'About Page']);
 });
 
+//Eager Loading
 Route::get('/posts', function () {
-    return view('posts', ['title' => 'Blog', 'posts' => Post::all()]);
+    $posts = Post::with(['author','category'])->latest()->get(); // Mengambil semua data post dengan relasi author dan category, sekaligus mengurutkan dari yang terbaru.
+    return view('posts', ['title' => 'Blog', 'posts' => $posts]);  // Mengirim data post yang sudah diambil ke view 'posts' dengan judul 'Blog'.
 });
 
 // route untuk menampilkan single post dalam blog dengan $slug dengan metode Route Model Binding
