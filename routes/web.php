@@ -19,8 +19,7 @@ Route::get('/about', function () {
 
 //Eager Loading
 Route::get('/posts', function () {
-    $posts = Post::latest()->get(); // Mengambil semua data post dengan relasi author dan category, sekaligus mengurutkan dari yang terbaru.
-    return view('posts', ['title' => 'Blog', 'posts' => $posts]);  // Mengirim data post yang sudah diambil ke view 'posts' dengan judul 'Blog'.
+    return view('posts', ['title' => 'Blog', 'posts' => Post::filter(request(['search','category','author']))->latest()->get()]);
 });
 
 // //Eager Loading
